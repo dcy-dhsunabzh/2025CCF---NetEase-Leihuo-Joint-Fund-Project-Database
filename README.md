@@ -2,6 +2,9 @@
 ## 项目说明
 本仓库为“基于人机协作的角色表情动画重定向”项目的实现，对所提供的30段基于MetaHuman绑定系统的表情动画进行重定向到少于70维度控制器的自定义头模面部。为了满足项目设置的控制器维度数目不超过70的要求，我们选择目标头模其中的45个控制器属性对其面部进行控制，目标头模文件位于下方网盘链接中，使用的45个控制器名称及属性信息位于`/Asset/mery_rig.txt`
 
+## 实现方案
+项目使用具有空间特征的MediaPipe生成的landmark图片作为中间量，实现MetaHuman图片 --> MetaHuman landmark image --> Alignment Module --> Target landmark image --> Target Controller Value的预测过程，项目的代码部分包括Alignment Module的实现(对应于step1_prepare.py)，目标头模landmark图片到控制器参数的映射使用ConvNeXt-Tiny作为backbone进行搭建，训练数据集为使用blendshape绑定系统下的真人动捕数据集，使用手动制作目标头模的52个基底表情间接得到粗糙的目标绑定系统下的数据集。
+
 ## 参考文件下载
 从以下网盘链接中下载 `https://pan.baidu.com/s/1vMqURBKHt-PMjUVLb46FvQ?pwd=xp7t`
 1. 目标头模文件`Mery.mb` 
